@@ -1,3 +1,4 @@
-// Screens push names
+// constant variables
 
-const homeLayout = '/home_layout';
+const baseURL = 'https://api.themoviedb.org/3';
+const imagesBaseURL = 'https://image.tmdb.org/t/p/w500';

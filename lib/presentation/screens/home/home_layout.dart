@@ -48,20 +48,38 @@ class _HomeLayoutState extends State<HomeLayout> {
                 colors: [black, darkRed, black],
               )),
             ),
-            // BlocBuilder<AppCubit, AppState>(
-            //   builder: (BuildContext context, state) {
-            //     if (state is AppGetContactsLoadingState) {
-            //       return const Center(
-            //         child: CircularProgressIndicator(color: darkBlue),
-            //       );
-            //     } else {
-            //       return
-                    cubit.screens[cubit.currentIndex],
-            //     }
-            //   },
-            // ),
-          ]
-          ),
+            BlocBuilder<AppCubit, AppState>(
+              builder: (BuildContext context, state) {
+                if (state is AppMoviesLoadingState) {
+                  return const Center(
+                    child: CircularProgressIndicator(color: white),
+                  );
+                } else if (state is AppMoviesSuccessState ||
+                    state is AppChangeBottomNavBarState) {
+                  return cubit.screens[cubit.currentIndex];
+                } else {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.error,
+                          color: Colors.red,
+                          size: 75.sp,
+                        ),
+                        DefaultText(
+                          text: 'Error Occurred!',
+                          textColor: white,
+                          textSize: 25.sp,
+                          weight: FontWeight.bold,
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              },
+            ),
+          ]),
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.shifting,
             selectedItemColor: white,
@@ -71,20 +89,17 @@ class _HomeLayoutState extends State<HomeLayout> {
             onTap: (index) => cubit.changeScreensIndex(index),
             items: [
               BottomNavigationBarItem(
-                icon: const Icon(Icons.movie_creation_outlined),
-                label: cubit.appBarTitles[0],
-                backgroundColor: darkRed
-              ),
+                  icon: const Icon(Icons.movie_creation_outlined),
+                  label: cubit.appBarTitles[0],
+                  backgroundColor: darkRed),
               BottomNavigationBarItem(
-                icon: const Icon(Icons.tv),
-                label: cubit.appBarTitles[1],
-                backgroundColor: Colors.red
-              ),
+                  icon: const Icon(Icons.tv),
+                  label: cubit.appBarTitles[1],
+                  backgroundColor: Colors.red),
               BottomNavigationBarItem(
-                icon: const Icon(Icons.star),
-                label: cubit.appBarTitles[1],
-                backgroundColor: lightRed
-              ),
+                  icon: const Icon(Icons.star),
+                  label: cubit.appBarTitles[1],
+                  backgroundColor: lightRed),
             ],
           ),
         );

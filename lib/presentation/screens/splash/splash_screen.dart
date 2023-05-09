@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:arts_home/core/constants.dart' as screens;
+import 'package:arts_home/core/screens.dart' as screens;
 import 'package:arts_home/presentation/widgets/default_text.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
@@ -18,7 +18,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
   late final AnimationController _controller;
-  late final Animation<double> _animation;
+  // late final Animation<double> _animation;
 
   @override
   void initState() {
@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen>
       duration: const Duration(milliseconds: 1200),
     )..repeat(reverse: true);
 
-    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
+    // _animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
 
     Timer(
       const Duration(milliseconds: 4000),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:arts_home/core/constants.dart' as screens;
+import 'package:arts_home/core/screens.dart' as screens;
 
 import '../screens/home/home_layout.dart';
 import '../screens/splash/splash_screen.dart';
