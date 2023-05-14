@@ -18,16 +18,25 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
   late final AnimationController _controller;
-  // late final Animation<double> _animation;
+  late final Animation<Offset> _animation;
 
   @override
   void initState() {
     _controller = AnimationController(
       vsync: this,
+      value: 1,
       duration: const Duration(milliseconds: 1200),
     )..repeat(reverse: true);
 
-    // _animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
+    _animation = Tween<Offset>(
+      begin: Offset.zero,
+      end: const Offset(0.0, -1.0),
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.ease,
+      ),
+    );
 
     Timer(
       const Duration(milliseconds: 4000),
@@ -61,17 +70,17 @@ class _SplashScreenState extends State<SplashScreen>
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // FadeTransition(
-              //   opacity: _animation,
-              //   child: SvgPicture.asset(
-              //     'assets/logo.svg',
-              //     height: 30.h,
-              //     width: 70.w,
-              //   ),
-              // ),
+              SlideTransition(
+                position: _animation,
+                child: Image.asset(
+                  'assets/logo.png',
+                  height: 30.h,
+                  width: 70.w,
+                ),
+              ),
               DefaultText(
-                text: 'Easy Contacts',
-                textColor: darkPurple,
+                text: 'ARTS HOME',
+                textColor: lightRed,
                 textSize: 25.sp,
                 weight: FontWeight.bold,
                 textStyle: FontStyle.italic,

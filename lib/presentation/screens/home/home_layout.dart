@@ -1,4 +1,5 @@
 import 'package:arts_home/presentation/styles/colors.dart';
+import 'package:arts_home/presentation/widgets/default_app_bar.dart';
 import 'package:arts_home/presentation/widgets/default_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +19,7 @@ class _HomeLayoutState extends State<HomeLayout> {
 
   @override
   void didChangeDependencies() {
-    cubit = AppCubit.get(context);
+    cubit = AppCubit.get(context)..getMovies()..getTvShows()..getStars();
     super.didChangeDependencies();
   }
 
@@ -28,17 +29,7 @@ class _HomeLayoutState extends State<HomeLayout> {
       builder: (context, state) {
         return Scaffold(
           extendBody: true,
-          appBar: AppBar(
-            backgroundColor: darkRed,
-            centerTitle: true,
-            elevation: 8,
-            title: DefaultText(
-              text: cubit.appBarTitles[cubit.currentIndex],
-              textColor: white,
-              weight: FontWeight.bold,
-              textSize: 20.sp,
-            ),
-          ),
+          appBar: DefaultAppBar(title: cubit.appBarTitles[cubit.currentIndex]),
           body: Stack(children: [
             Container(
               decoration: const BoxDecoration(
@@ -50,11 +41,15 @@ class _HomeLayoutState extends State<HomeLayout> {
             ),
             BlocBuilder<AppCubit, AppState>(
               builder: (BuildContext context, state) {
-                if (state is AppMoviesLoadingState) {
+                if (state is AppMoviesLoadingState ||
+                    state is AppMoviesLoadingState ||
+                    state is AppStarsLoadingState) {
                   return const Center(
                     child: CircularProgressIndicator(color: white),
                   );
                 } else if (state is AppMoviesSuccessState ||
+                    state is AppTvShowsSuccessState ||
+                    state is AppStarsSuccessState ||
                     state is AppChangeBottomNavBarState) {
                   return cubit.screens[cubit.currentIndex];
                 } else {
@@ -98,7 +93,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                   backgroundColor: Colors.red),
               BottomNavigationBarItem(
                   icon: const Icon(Icons.star),
-                  label: cubit.appBarTitles[1],
+                  label: cubit.appBarTitles[2],
                   backgroundColor: lightRed),
             ],
           ),

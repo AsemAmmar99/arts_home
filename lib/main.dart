@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
     return Sizer(
       builder: (context, orientation, deviceType) {
         return BlocProvider(
-          create: (context) => AppCubit()..getMovies(),
+          create: (context) => AppCubit(),
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Arts Home',

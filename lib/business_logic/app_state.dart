@@ -12,3 +12,15 @@ class AppMoviesSuccessState extends AppState {}
 class AppMoviesLoadingState extends AppState {}
 
 class AppMoviesErrorState extends AppState {}
+
+class AppTvShowsSuccessState extends AppState {}
+
+class AppTvShowsLoadingState extends AppState {}
+
+class AppTvShowsErrorState extends AppState {}
+
+class AppStarsSuccessState extends AppState {}
+
+class AppStarsLoadingState extends AppState {}
+
+class AppStarsErrorState extends AppState {}
